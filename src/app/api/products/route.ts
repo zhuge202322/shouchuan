@@ -5,10 +5,7 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get('category');
   const perPage = searchParams.get('per_page') || '12';
 
-  const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
-  if (!wpUrl) {
-    return NextResponse.json({ error: 'WordPress API URL not configured' }, { status: 500 });
-  }
+  const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
 
   let apiUrl = `${wpUrl}wp-json/wc/store/products?per_page=${perPage}`;
   if (category) {
