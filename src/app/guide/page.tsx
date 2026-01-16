@@ -22,8 +22,9 @@ interface Post {
 
 async function getPosts(): Promise<Post[]> {
   try {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wp/v2/posts?_embed&per_page=9`,
+      `${wpUrl}wp-json/wp/v2/posts?_embed&per_page=9`,
       { next: { revalidate: 3600 } }
     );
 

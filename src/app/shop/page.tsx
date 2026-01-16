@@ -24,7 +24,8 @@ interface CategoryWithChildren extends Category {
 
 async function getCategories(): Promise<Category[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wp/v2/product_cat?per_page=100&hide_empty=false`, {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
+    const res = await fetch(`${wpUrl}wp-json/wp/v2/product_cat?per_page=100&hide_empty=false`, {
       next: { revalidate: 3600 },
     });
 
@@ -41,7 +42,8 @@ async function getCategories(): Promise<Category[]> {
 
 async function getShopProducts(): Promise<Product[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wc/store/products?per_page=12`, {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
+    const res = await fetch(`${wpUrl}wp-json/wc/store/products?per_page=12`, {
       next: { revalidate: 60 },
     });
     

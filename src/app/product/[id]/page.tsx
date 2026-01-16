@@ -16,7 +16,8 @@ interface Product {
 
 async function getProduct(id: string): Promise<Product | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wc/store/products/${id}`, {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
+    const res = await fetch(`${wpUrl}wp-json/wc/store/products/${id}`, {
       next: { revalidate: 60 },
     });
     
