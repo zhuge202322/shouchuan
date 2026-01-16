@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingBag, Star, Compass, Gem } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
@@ -188,7 +189,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
                 {latestProducts.length > 0 ? (
                   latestProducts.map((product) => (
-                    <div key={product.id} className="group cursor-pointer">
+                    <Link href={`/product/${product.id}`} key={product.id} className="group cursor-pointer">
                       <div className="relative aspect-square bg-[#151517] border border-stone-800 group-hover:border-[#d4af37]/50 transition duration-500 overflow-hidden">
                         {product.images[0] ? (
                           <Image 
@@ -202,7 +203,7 @@ export default async function Home() {
                         )}
                       </div>
                       <h3 className="mt-2 md:mt-4 text-center font-serif text-stone-300 group-hover:text-[#d4af37] transition text-sm md:text-base">{product.name}</h3>
-                    </div>
+                    </Link>
                   ))
                 ) : (
                   <div className="col-span-2 md:col-span-3 text-stone-500 text-center">Loading collections...</div>
@@ -216,7 +217,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
                 {randomProducts.length > 0 ? (
                   randomProducts.map((product) => (
-                    <div key={product.id} className="group cursor-pointer">
+                    <Link href={`/product/${product.id}`} key={product.id} className="group cursor-pointer">
                       <div className="relative aspect-square bg-[#151517] border border-stone-800 group-hover:border-[#d4af37]/50 transition duration-500 overflow-hidden">
                         {product.images[0] ? (
                           <Image 
@@ -232,7 +233,7 @@ export default async function Home() {
                       <h3 className="mt-2 md:mt-4 text-xs md:text-sm text-stone-400 group-hover:text-[#d4af37] transition leading-relaxed md:pr-4">
                         {product.name}
                       </h3>
-                    </div>
+                    </Link>
                   ))
                 ) : (
                   <div className="col-span-2 md:col-span-3 text-stone-500 text-center">Loading artifacts...</div>
