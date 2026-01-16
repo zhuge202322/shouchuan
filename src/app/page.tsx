@@ -11,7 +11,8 @@ interface Product {
 
 async function getLatestProducts(): Promise<Product[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wc/store/products?per_page=3`, {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
+    const res = await fetch(`${wpUrl}wp-json/wc/store/products?per_page=3`, {
       next: { revalidate: 60 },
     });
     
@@ -29,8 +30,9 @@ async function getLatestProducts(): Promise<Product[]> {
 
 async function getRandomProducts(): Promise<Product[]> {
   try {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || "http://43.165.68.39/";
     // Fetch a larger pool to pick random items from
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp-json/wc/store/products?per_page=20`, {
+    const res = await fetch(`${wpUrl}wp-json/wc/store/products?per_page=20`, {
       next: { revalidate: 60 },
     });
     
