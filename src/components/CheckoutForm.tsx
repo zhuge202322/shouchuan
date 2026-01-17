@@ -45,18 +45,17 @@ export default function CheckoutForm() {
     setIsProcessing(true);
     setErrorMessage(null);
 
-    const { error } = await stripe.confirmPayment({
+    // 1. Confirm Payment with Stripe
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/checkout/success`,
         payment_method_data: {
             billing_details: {
                 name: `${formData.firstName} ${formData.lastName}`,
                 email: formData.email,
                 address: {
                     city: formData.city,
-                    country: "US", // Simplified for now, map properly if needed
+                    country: "US", // Simplified for now
                     line1: formData.address,
                     line2: formData.apartment,
                     postal_code: formData.zipCode,
@@ -65,15 +64,46 @@ export default function CheckoutForm() {
             }
         }
       },
+      redirect: "if_required", // Important: We want to handle success manually
     });
 
     if (error) {
       setErrorMessage(error.message || "An unexpected error occurred.");
       setIsProcessing(false);
+      return;
+    }
+
+    // 2. If Payment Succeeded, Create Order in WooCommerce
+    if (paymentIntent && paymentIntent.status === "succeeded") {
+        try {
+            const res = await fetch("/api/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    paymentIntentId: paymentIntent.id,
+                    amount: paymentIntent.amount,
+                    items: cartItems,
+                    billingDetails: formData
+                }),
+            });
+
+            if (!res.ok) {
+                console.error("Order creation failed but payment succeeded");
+                // Optional: You might want to log this to a monitoring service
+                // or show a specific message. For now, we still consider it a "success"
+                // from the user's perspective as they paid.
+            }
+
+            // 3. Redirect to Success Page
+            window.location.href = "/checkout/success";
+
+        } catch (err) {
+            console.error("Error creating order:", err);
+            // Still redirect to success because payment was taken
+            window.location.href = "/checkout/success";
+        }
     } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
+        setIsProcessing(false);
     }
   };
 
