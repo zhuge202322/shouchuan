@@ -2,6 +2,7 @@
 
 import { useCart } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Lock, CreditCard } from "lucide-react";
@@ -267,6 +268,8 @@ export default function CheckoutPage() {
 
           </div>
         </div>
+
+        <Footer />
       </div>
     </div>
   );

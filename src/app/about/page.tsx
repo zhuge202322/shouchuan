@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Scroll, Sparkles, Gem, Compass } from "lucide-react";
 
 export default function AboutPage() {
@@ -145,6 +146,8 @@ export default function AboutPage() {
           </section>
 
         </main>
+        
+        <Footer />
       </div>
     </div>
   );

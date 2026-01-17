@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import ProductImageGallery from "@/components/ProductImageGallery";
+import Footer from "@/components/Footer";
 import AddToCartButton from "@/components/AddToCartButton";
+import ProductImageGallery from "@/components/ProductImageGallery";
 import { Star, ShoppingBag, Shield, Zap, Sun, Wind, Scroll, Sparkles } from "lucide-react";
 
 interface Product {
@@ -213,6 +215,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
 
         </main>
+        
+        <Footer />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Star, Compass, Gem } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface Product {
   id: number;
@@ -241,45 +242,11 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Testimonials Footer Area */}
-            <div className="pt-8 md:pt-12 border-t border-stone-900">
-              <h2 className="text-lg md:text-xl font-serif text-[#f0e6d2] mb-6 text-center md:text-left">Testimonials</h2>
-              <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 md:gap-8">
-                <div className="text-center md:text-left">
-                  <div className="flex text-[#d4af37] mb-2 gap-1 justify-center md:justify-start">
-                    {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <ul className="text-xs text-stone-500 space-y-2 mt-4">
-                    <li><a href="#" className="hover:text-stone-300">Policies</a></li>
-                    <li><a href="#" className="hover:text-stone-300">Contact</a></li>
-                    <li><a href="#" className="hover:text-stone-300">FAQ</a></li>
-                  </ul>
-                </div>
-                
-                <div className="max-w-md text-center md:text-right">
-                  <div className="flex text-[#d4af37] mb-2 gap-1 justify-center md:justify-end">
-                     {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <p className="text-sm italic text-stone-400">"I can feel the cosmic aura & Bestiality wind packaged"</p>
-                </div>
-              </div>
-              
-              <div className="mt-8 md:mt-12 pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center text-[10px] text-stone-600 gap-2">
-                <p>© 2026 Prana Heals. All Cosmic Rights Reserved.</p>
-                <p>Crafted with Intention in [Your City/Region]</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
-      
-      {/* Floating Sparkle/Decoration */}
-      <div className="fixed bottom-8 right-8 text-stone-600 opacity-20 pointer-events-none">
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" />
-        </svg>
-      </div>
+
+      <Footer />
       </div>
     </div>
   );

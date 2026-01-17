@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Trash2, Minus, Plus, ArrowRight, ShieldCheck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
@@ -142,6 +143,8 @@ export default function CartPage() {
             </div>
           )}
         </div>
+
+        <Footer />
       </div>
     </div>
   );
